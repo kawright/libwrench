@@ -2,3 +2,5 @@ build
 venv
 example*
 .vscode
+bins
+temp

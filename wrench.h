@@ -7,8 +7,6 @@ PROJECT WEBSITE:    https://kriswrightdev.com/wrench/home
 PROJECT GITHUB:     https://github.com/kawright/libwrench
 AUTHOR:             Kristoffer A. Wright
 AUTHOR EMAIL:       kris.al.wright@gmail.com
-VERSION NUMBER:     0.1.0
-VERSION DATE:       20 February 2022
 */
 
 #ifndef WRENCH_H_

@@ -1,6 +1,23 @@
-.PHONY: clean all
+.PHONY: clean bins tests
 
-all: build/static/libwrench.a build/shared/libwrench.so
+bins: build/static/libwrench.a build/shared/libwrench.so
+
+tests: build/tests/test_wrench
+
+################################## T E S T S ###################################
+
+build/tests/test_wrench: wrench.c wrench.h tests/test_wrench.c tests/test_wrench.h tests/test_ASSERTEQ.c
+	@ echo ========================================
+	@ echo Compiling test suite
+	@ echo ========================================
+	@ mkdir -p build
+	@ mkdir -p build/tests
+	@ mkdir -p build/tests/obj
+	gcc -g -Wall -o build/tests/obj/wrench.o -c wrench.c
+	gcc -g -Wall -o build/tests/obj/test_wrench.o -c tests/test_wrench.c
+	gcc -g -Wall -o build/tests/obj/test_ASSERTEQ.o -c tests/test_ASSERTEQ.c
+	gcc -o build/tests/test_wrench build/tests/obj/wrench.o build/tests/obj/test_wrench.o build/tests/obj/test_ASSERTEQ.o
+	@ echo Finished!
 
 ########################## L I B R A R Y    F I L E S ##########################
 
