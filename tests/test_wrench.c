@@ -1,5 +1,5 @@
 /*
-test_wrench.c - Simple Unit Testing for C
+test_wrench.c
 
 This file implements the test suite for running all wrench unit tests.
 
@@ -11,6 +11,8 @@ AUTHOR EMAIL:       kris.al.wright@gmail.com
 
 #include "test_wrench.h"
 #include "../wrench.h"
+#include <stdio.h>
+#include <time.h>
 
 #define OUTPUT_PATH "./build/tests/wrench_test_results.tap"
 
@@ -26,6 +28,8 @@ int main(){
     wr_Test test_ASSERTEQ_decs_not_equal                    = NULL;
     wr_Test test_ASSERTEQ_mix_equal                         = NULL;
     wr_Test test_ASSERTEQ_mix_not_equal                     = NULL;
+    wr_Test test_ASSERTFALSE_zero                           = NULL;
+    wr_Test test_ASSERTFALSE_not_zero                       = NULL;
 
     /* Instantiate tests: */
     if(wr_newtest(&cb_ASSERTEQ_ints_equal, 
@@ -58,6 +62,16 @@ int main(){
             &test_ASSERTEQ_mix_not_equal) != wr_ERROK) {
         return 1;
     }
+    if(wr_newtest(&cb_ASSERTFALSE_zero, 
+            "Test wr_ASSERTFALSE with zero", 
+            &test_ASSERTFALSE_zero) != wr_ERROK) {
+        return 1;
+    }
+    if(wr_newtest(&cb_ASSERTFALSE_not_zero, 
+            "Test wr_ASSERTFALSE with a non-zero value", 
+            &test_ASSERTFALSE_not_zero) != wr_ERROK) {
+        return 1;
+    }
 
     /* Create test roster: */
     wr_Test roster[] = {
@@ -66,7 +80,9 @@ int main(){
         test_ASSERTEQ_decs_equal,
         test_ASSERTEQ_decs_not_equal,
         test_ASSERTEQ_mix_equal,
-        test_ASSERTEQ_mix_not_equal
+        test_ASSERTEQ_mix_not_equal,
+        test_ASSERTFALSE_zero,
+        test_ASSERTFALSE_not_zero
     };
 
     /* Initialize and instantiate suite: */
@@ -75,9 +91,23 @@ int main(){
         &mainsuite);
     if (err != wr_ERROK) { return 1; }
 
+    /* Suite configuration... */
+    wr_enableplan(mainsuite);
+    if(wr_setsuiteprediags(mainsuite, 
+    "========================================================================\n"
+    "wrench Test Suite\n"
+    " \n"
+    "This suite tests v0.1.x builds\n"
+    "========================================================================"
+            ) != wr_ERROK) {
+        return 1;
+    } 
+    
     /* Run the suite: */
+    printf("Running test suite...\n");
     err = wr_runsuite(mainsuite, &res);
     if (err != wr_ERROK) { return 1; }
+    printf("Finished!\n");
 
     /* Give the proper exit code: */
     if (res == wr_SRESOK){

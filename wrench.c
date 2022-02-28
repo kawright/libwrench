@@ -1,5 +1,5 @@
 /*
-wrench.c - Simple Unit Testing for C
+wrench.c
 
 This file contains the entire implementation of the wrench unit testing
 framework.

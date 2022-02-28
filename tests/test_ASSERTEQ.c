@@ -1,5 +1,5 @@
 /*
-test_ASSERTEQ.c - Simple Unit Testing for C
+test_ASSERTEQ.c
 
 This file contains the implementation for all unit tests of the wr_ASSERTEQ
 macro.
@@ -12,6 +12,7 @@ AUTHOR EMAIL:       kris.al.wright@gmail.com
 
 #include "test_wrench.h"
 #include "../wrench.h"
+#include <assert.h>
 
 /*
 *********************** S A M P L E    F U N C T I O N S ***********************
@@ -54,6 +55,8 @@ wr_CallbackReturn sample_mix_not_equal(wr_TestContext context){
 /************************ T E S T    F U N C T I O N S ************************/
 
 wr_CallbackReturn cb_ASSERTEQ_ints_equal(wr_TestContext context){
+
+    assert(wr_settestprediags(context, "Macro wr_ASSERTEQ Tests:") == wr_ERROK);
 
     wr_CallbackReturn expect    = wr_RETOK;
     wr_CallbackReturn real      = sample_ints_equal(NULL);

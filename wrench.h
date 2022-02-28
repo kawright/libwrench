@@ -1,5 +1,5 @@
 /*
-wrench.h - Simple Unit Testing for C
+wrench.h
 
 This header file defines the public API for the wrench unit testing framework.
 
