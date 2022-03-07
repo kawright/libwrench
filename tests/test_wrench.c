@@ -22,170 +22,224 @@ int main(){
     wr_SuiteResult  res;                    // Suite result
 
     /* Initialize test vars: */
-    wr_Test test_ASSERTEQ_ints_equal                        = NULL;
-    wr_Test test_ASSERTEQ_ints_not_equal                    = NULL;
-    wr_Test test_ASSERTEQ_decs_equal                        = NULL;
-    wr_Test test_ASSERTEQ_decs_not_equal                    = NULL;
-    wr_Test test_ASSERTEQ_mix_equal                         = NULL;
-    wr_Test test_ASSERTEQ_mix_not_equal                     = NULL;
-    wr_Test test_ASSERTFALSE_zero                           = NULL;
-    wr_Test test_ASSERTFALSE_not_zero                       = NULL;
-    wr_Test test_ASSERTGT_ints_a_gt_b                       = NULL;
-    wr_Test test_ASSERTGT_ints_a_equals_b                   = NULL;
-    wr_Test test_ASSERTGT_ints_a_lt_b                       = NULL;
-    wr_Test test_ASSERTGT_decs_a_gt_b                       = NULL;
-    wr_Test test_ASSERTGT_decs_a_equals_b                   = NULL;
-    wr_Test test_ASSERTGT_decs_a_lt_b                       = NULL;
-    wr_Test test_ASSERTGT_mix_a_gt_b                        = NULL;
-    wr_Test test_ASSERTGT_mix_a_equals_b                    = NULL;
-    wr_Test test_ASSERTGT_mix_a_lt_b                        = NULL;
-    wr_Test test_ASSERTGTEQ_ints_a_gt_b                     = NULL;
-    wr_Test test_ASSERTGTEQ_ints_a_equals_b                 = NULL;
-    wr_Test test_ASSERTGTEQ_ints_a_lt_b                     = NULL;
-    wr_Test test_ASSERTGTEQ_decs_a_gt_b                     = NULL;
-    wr_Test test_ASSERTGTEQ_decs_a_equals_b                 = NULL;
-    wr_Test test_ASSERTGTEQ_decs_a_lt_b                     = NULL;
-    wr_Test test_ASSERTGTEQ_mix_a_gt_b                      = NULL;
-    wr_Test test_ASSERTGTEQ_mix_a_equals_b                  = NULL;
-    wr_Test test_ASSERTGTEQ_mix_a_lt_b                      = NULL;
+    wr_Test test_ASSERTEQ_ints_equal                            = NULL;
+    wr_Test test_ASSERTEQ_ints_not_equal                        = NULL;
+    wr_Test test_ASSERTEQ_decs_equal                            = NULL;
+    wr_Test test_ASSERTEQ_decs_not_equal                        = NULL;
+    wr_Test test_ASSERTEQ_mix_equal                             = NULL;
+    wr_Test test_ASSERTEQ_mix_not_equal                         = NULL;
+    wr_Test test_ASSERTFALSE_zero                               = NULL;
+    wr_Test test_ASSERTFALSE_not_zero                           = NULL;
+    wr_Test test_ASSERTGT_ints_a_gt_b                           = NULL;
+    wr_Test test_ASSERTGT_ints_a_equals_b                       = NULL;
+    wr_Test test_ASSERTGT_ints_a_lt_b                           = NULL;
+    wr_Test test_ASSERTGT_decs_a_gt_b                           = NULL;
+    wr_Test test_ASSERTGT_decs_a_equals_b                       = NULL;
+    wr_Test test_ASSERTGT_decs_a_lt_b                           = NULL;
+    wr_Test test_ASSERTGT_mix_a_gt_b                            = NULL;
+    wr_Test test_ASSERTGT_mix_a_equals_b                        = NULL;
+    wr_Test test_ASSERTGT_mix_a_lt_b                            = NULL;
+    wr_Test test_ASSERTGTEQ_ints_a_gt_b                         = NULL;
+    wr_Test test_ASSERTGTEQ_ints_a_equals_b                     = NULL;
+    wr_Test test_ASSERTGTEQ_ints_a_lt_b                         = NULL;
+    wr_Test test_ASSERTGTEQ_decs_a_gt_b                         = NULL;
+    wr_Test test_ASSERTGTEQ_decs_a_equals_b                     = NULL;
+    wr_Test test_ASSERTGTEQ_decs_a_lt_b                         = NULL;
+    wr_Test test_ASSERTGTEQ_mix_a_gt_b                          = NULL;
+    wr_Test test_ASSERTGTEQ_mix_a_equals_b                      = NULL;
+    wr_Test test_ASSERTGTEQ_mix_a_lt_b                          = NULL;
+    wr_Test test_ASSERTLT_ints_a_gt_b                           = NULL;
+    wr_Test test_ASSERTLT_ints_a_equals_b                       = NULL;
+    wr_Test test_ASSERTLT_ints_a_lt_b                           = NULL;
+    wr_Test test_ASSERTLT_decs_a_gt_b                           = NULL;
+    wr_Test test_ASSERTLT_decs_a_equals_b                       = NULL;
+    wr_Test test_ASSERTLT_decs_a_lt_b                           = NULL;
+    wr_Test test_ASSERTLT_mix_a_gt_b                            = NULL;
+    wr_Test test_ASSERTLT_mix_a_equals_b                        = NULL;
+    wr_Test test_ASSERTLT_mix_a_lt_b                            = NULL;
 
     /* Instantiate tests: */
     err = wr_newtest(&cb_ASSERTEQ_ints_equal, 
-            "Test wr_ASSERTEQ with two equal integers", 
-            &test_ASSERTEQ_ints_equal);
+        "Test wr_ASSERTEQ with two equal integers", 
+        &test_ASSERTEQ_ints_equal);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTEQ_ints_not_equal, 
-            "Test wr_ASSERTEQ with two non-equal integers", 
-            &test_ASSERTEQ_ints_not_equal);
+        "Test wr_ASSERTEQ with two non-equal integers", 
+        &test_ASSERTEQ_ints_not_equal);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTEQ_decs_equal, 
             "Test wr_ASSERTEQ with two equal floats", 
-            &test_ASSERTEQ_decs_equal);
+        &test_ASSERTEQ_decs_equal);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTEQ_decs_not_equal, 
-            "Test wr_ASSERTEQ with two non-equal floats", 
-            &test_ASSERTEQ_decs_not_equal);
+        "Test wr_ASSERTEQ with two non-equal floats", 
+        &test_ASSERTEQ_decs_not_equal);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTEQ_mix_equal, 
-            "Test wr_ASSERTEQ with an equivalent float and int", 
-            &test_ASSERTEQ_mix_equal);
+        "Test wr_ASSERTEQ with an equivalent float and int", 
+        &test_ASSERTEQ_mix_equal);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTEQ_mix_not_equal, 
-            "Test wr_ASSERTEQ with a non-equivalent float and int", 
-            &test_ASSERTEQ_mix_not_equal);
+        "Test wr_ASSERTEQ with a non-equivalent float and int", 
+        &test_ASSERTEQ_mix_not_equal);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTFALSE_zero, 
-            "Test wr_ASSERTFALSE with zero", 
-            &test_ASSERTFALSE_zero);
+        "Test wr_ASSERTFALSE with zero", 
+        &test_ASSERTFALSE_zero);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTFALSE_not_zero, 
-            "Test wr_ASSERTFALSE with a non-zero value", 
-            &test_ASSERTFALSE_not_zero);
+        "Test wr_ASSERTFALSE with a non-zero value", 
+        &test_ASSERTFALSE_not_zero);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGT_ints_a_gt_b, 
-            "Test wr_ASSERTGT where int a is greater than int b", 
-            &test_ASSERTGT_ints_a_gt_b);
+        "Test wr_ASSERTGT where int a is greater than int b", 
+        &test_ASSERTGT_ints_a_gt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGT_ints_a_equals_b, 
-            "Test wr_ASSERTGT where int a is equal to int b", 
-            &test_ASSERTGT_ints_a_equals_b);
+        "Test wr_ASSERTGT where int a is equal to int b", 
+        &test_ASSERTGT_ints_a_equals_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGT_ints_a_lt_b, 
-            "Test wr_ASSERTGT where int a is less than int b", 
-            &test_ASSERTGT_ints_a_lt_b);
+        "Test wr_ASSERTGT where int a is less than int b", 
+        &test_ASSERTGT_ints_a_lt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGT_decs_a_gt_b, 
-            "Test wr_ASSERTGT where float a is greater than float b", 
-            &test_ASSERTGT_decs_a_gt_b);
+        "Test wr_ASSERTGT where float a is greater than float b", 
+        &test_ASSERTGT_decs_a_gt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGT_decs_a_equals_b, 
-            "Test wr_ASSERTGT where float a is equal to float b", 
-            &test_ASSERTGT_decs_a_equals_b);
+        "Test wr_ASSERTGT where float a is equal to float b", 
+        &test_ASSERTGT_decs_a_equals_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGT_decs_a_lt_b, 
-            "Test wr_ASSERTGT where float a is less than float b", 
-            &test_ASSERTGT_decs_a_lt_b);
+        "Test wr_ASSERTGT where float a is less than float b", 
+        &test_ASSERTGT_decs_a_lt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGT_mix_a_gt_b, 
-            "Test wr_ASSERTGT where a is greater than b and are of different "
-            "types", 
-            &test_ASSERTGT_mix_a_gt_b);
+        "Test wr_ASSERTGT where a is greater than b and are of different "
+        "types", 
+        &test_ASSERTGT_mix_a_gt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGT_mix_a_equals_b, 
-            "Test wr_ASSERTGT where a is equal to b and are of different "
-            "types", 
-            &test_ASSERTGT_mix_a_equals_b);
+        "Test wr_ASSERTGT where a is equal to b and are of different "
+        "types", 
+        &test_ASSERTGT_mix_a_equals_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGT_mix_a_lt_b, 
-            "Test wr_ASSERTGT where a is less than b and are of different "
-            "types", 
-            &test_ASSERTGT_mix_a_lt_b);
+        "Test wr_ASSERTGT where a is less than b and are of different "
+        "types", 
+        &test_ASSERTGT_mix_a_lt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGTEQ_ints_a_gt_b, 
-            "Test wr_ASSERTGTEQ where int a is greater than int b", 
-            &test_ASSERTGTEQ_ints_a_gt_b);
+        "Test wr_ASSERTGTEQ where int a is greater than int b", 
+        &test_ASSERTGTEQ_ints_a_gt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGTEQ_ints_a_equals_b, 
-            "Test wr_ASSERTGTEQ where int a is equal to int b", 
-            &test_ASSERTGTEQ_ints_a_equals_b);
+        "Test wr_ASSERTGTEQ where int a is equal to int b", 
+        &test_ASSERTGTEQ_ints_a_equals_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGTEQ_ints_a_lt_b, 
-            "Test wr_ASSERTGTEQ where int a is less than int b", 
-            &test_ASSERTGTEQ_ints_a_lt_b);
+        "Test wr_ASSERTGTEQ where int a is less than int b", 
+        &test_ASSERTGTEQ_ints_a_lt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGTEQ_decs_a_gt_b, 
-            "Test wr_ASSERTGTEQ where float a is greater than float b", 
-            &test_ASSERTGTEQ_decs_a_gt_b);
+        "Test wr_ASSERTGTEQ where float a is greater than float b", 
+        &test_ASSERTGTEQ_decs_a_gt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGTEQ_decs_a_equals_b, 
-            "Test wr_ASSERTGTEQ where float a is equal to float b", 
-            &test_ASSERTGTEQ_decs_a_equals_b);
+        "Test wr_ASSERTGTEQ where float a is equal to float b", 
+        &test_ASSERTGTEQ_decs_a_equals_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGTEQ_decs_a_lt_b, 
-            "Test wr_ASSERTGTEQ where float a is less than float b", 
-            &test_ASSERTGTEQ_decs_a_lt_b);
+        "Test wr_ASSERTGTEQ where float a is less than float b", 
+        &test_ASSERTGTEQ_decs_a_lt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGTEQ_mix_a_gt_b, 
-            "Test wr_ASSERTGTEQ where a is greater than b and are of different "
-            "types", 
-            &test_ASSERTGTEQ_mix_a_gt_b);
+        "Test wr_ASSERTGTEQ where a is greater than b and are of different "
+        "types", 
+        &test_ASSERTGTEQ_mix_a_gt_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGTEQ_mix_a_equals_b, 
-            "Test wr_ASSERTGTEQ where a is equal to b and are of different "
-            "types", 
-            &test_ASSERTGTEQ_mix_a_equals_b);
+        "Test wr_ASSERTGTEQ where a is equal to b and are of different "
+        "types", 
+        &test_ASSERTGTEQ_mix_a_equals_b);
     assert(err == wr_ERROK);
 
     err = wr_newtest(&cb_ASSERTGTEQ_mix_a_lt_b, 
-            "Test wr_ASSERTGTEQ where a is less than b and are of different "
-            "types", 
-            &test_ASSERTGTEQ_mix_a_lt_b);
+        "Test wr_ASSERTGTEQ where a is less than b and are of different "
+        "types", 
+        &test_ASSERTGTEQ_mix_a_lt_b);
     assert(err == wr_ERROK);
 
+    err = wr_newtest(&cb_ASSERTLT_ints_a_gt_b,
+        "Test wr_ASSERTLT where int a is greater than int b",
+        &test_ASSERTLT_ints_a_gt_b);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTLT_ints_a_equals_b,
+        "Test wr_ASSERTLT where int a is equal to int b",
+        &test_ASSERTLT_ints_a_equals_b);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTLT_ints_a_lt_b,
+        "Test wr_ASSERTLT where int a is less than int b",
+        &test_ASSERTLT_ints_a_lt_b);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTLT_decs_a_gt_b,
+        "Test wr_ASSERTLT where float a is greater than float b",
+        &test_ASSERTLT_decs_a_gt_b);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTLT_decs_a_equals_b,
+        "Test wr_ASSERTLT where float a is equal to float b",
+        &test_ASSERTLT_decs_a_equals_b);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTLT_decs_a_lt_b,
+        "Test wr_ASSERTLT where float a is less than float b",
+        &test_ASSERTLT_decs_a_lt_b);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTLT_mix_a_gt_b,
+        "Test wr_ASSERTLT where a is greater than b and are of different "
+        "types",
+        &test_ASSERTLT_mix_a_gt_b);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTLT_mix_a_equals_b,
+        "Test wr_ASSERTLT where a is equal to b and are of different types",
+        &test_ASSERTLT_mix_a_equals_b);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTLT_mix_a_lt_b,
+        "Test wr_ASSERTLT where a is less than b and are of different types",
+        &test_ASSERTLT_mix_a_lt_b);
+    assert(err == wr_ERROK);
 
     /* Create test roster: */
     wr_Test roster[] = {
@@ -214,7 +268,16 @@ int main(){
         test_ASSERTGTEQ_decs_a_lt_b,
         test_ASSERTGTEQ_mix_a_gt_b,
         test_ASSERTGTEQ_mix_a_equals_b,
-        test_ASSERTGTEQ_mix_a_lt_b
+        test_ASSERTGTEQ_mix_a_lt_b,
+        test_ASSERTLT_ints_a_gt_b,
+        test_ASSERTLT_ints_a_equals_b,
+        test_ASSERTLT_ints_a_lt_b,
+        test_ASSERTLT_decs_a_gt_b,
+        test_ASSERTLT_decs_a_equals_b,
+        test_ASSERTLT_decs_a_lt_b,
+        test_ASSERTLT_mix_a_gt_b,
+        test_ASSERTLT_mix_a_equals_b,
+        test_ASSERTLT_mix_a_lt_b
     };
 
     /* Initialize and instantiate suite: */

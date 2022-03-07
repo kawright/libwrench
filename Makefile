@@ -6,7 +6,7 @@ tests: build/tests/test_wrench
 
 ################################## T E S T S ###################################
 
-build/tests/test_wrench: wrench.c wrench.h tests/test_wrench.c tests/test_wrench.h tests/test_ASSERTEQ.c tests/test_ASSERTFALSE.c tests/test_ASSERTGT.c tests/test_ASSERTGTEQ.c
+build/tests/test_wrench: wrench.c wrench.h tests/test_wrench.c tests/test_wrench.h tests/test_ASSERTEQ.c tests/test_ASSERTFALSE.c tests/test_ASSERTGT.c tests/test_ASSERTGTEQ.c tests/test_ASSERTLT.c
 	@ echo ========================================
 	@ echo Compiling test suite
 	@ echo ========================================
@@ -19,7 +19,8 @@ build/tests/test_wrench: wrench.c wrench.h tests/test_wrench.c tests/test_wrench
 	gcc -g -Wall -o build/tests/obj/test_ASSERTFALSE.o -c tests/test_ASSERTFALSE.c
 	gcc -g -Wall -o build/tests/obj/test_ASSERTGT.o -c tests/test_ASSERTGT.c
 	gcc -g -Wall -o build/tests/obj/test_ASSERTGTEQ.o -c tests/test_ASSERTGTEQ.c
-	gcc -o build/tests/test_wrench build/tests/obj/wrench.o build/tests/obj/test_wrench.o build/tests/obj/test_ASSERTEQ.o build/tests/obj/test_ASSERTFALSE.o build/tests/obj/test_ASSERTGT.o build/tests/obj/test_ASSERTGTEQ.o
+	gcc -g -Wall -o build/tests/obj/test_ASSERTLT.o -c tests/test_ASSERTLT.c
+	gcc -o build/tests/test_wrench build/tests/obj/wrench.o build/tests/obj/test_wrench.o build/tests/obj/test_ASSERTEQ.o build/tests/obj/test_ASSERTFALSE.o build/tests/obj/test_ASSERTGT.o build/tests/obj/test_ASSERTGTEQ.o build/tests/obj/test_ASSERTLT.o
 	@ echo Finished!
 
 ########################## L I B R A R Y    F I L E S ##########################
