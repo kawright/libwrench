@@ -22,12 +22,12 @@ AUTHOR EMAIL:       kris.al.wright@gmail.com
 ********************************************************************************
 */
 
-wr_CallbackReturn sample_zero(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTFALSE_zero(wr_TestContext context){
     wr_ASSERTFALSE(0);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_not_zero(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTFALSE_not_zero(wr_TestContext context){
     wr_ASSERTFALSE(1);
     return wr_RETOK;
 }
@@ -40,7 +40,7 @@ wr_CallbackReturn cb_ASSERTFALSE_zero(wr_TestContext context){
         == wr_ERROK);
     
     wr_CallbackReturn expect    = wr_RETOK;
-    wr_CallbackReturn real      = sample_zero(NULL);
+    wr_CallbackReturn real      = sample_ASSERTFALSE_zero(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -50,7 +50,7 @@ wr_CallbackReturn cb_ASSERTFALSE_zero(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTFALSE_not_zero(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETNOK;
-    wr_CallbackReturn real      = sample_not_zero(NULL);
+    wr_CallbackReturn real      = sample_ASSERTFALSE_not_zero(NULL);
 
     wr_ASSERTEQ(expect, real);
 

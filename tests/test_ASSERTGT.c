@@ -22,47 +22,47 @@ AUTHOR EMAIL:       kris.al.wright@gmail.com
 ********************************************************************************
 */
 
-wr_CallbackReturn sample_ints_a_gt_b(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTGT_ints_a_gt_b(wr_TestContext context){
     wr_ASSERTGT(12, 5);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_ints_a_equals_b(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTGT_ints_a_equals_b(wr_TestContext context){
     wr_ASSERTGT(143, 143);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_ints_a_lt_b(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTGT_ints_a_lt_b(wr_TestContext context){
     wr_ASSERTGT(-4, 4);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_decs_a_gt_b(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTGT_decs_a_gt_b(wr_TestContext context){
     wr_ASSERTGT(15.5, 3.0);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_decs_a_equals_b(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTGT_decs_a_equals_b(wr_TestContext context){
     wr_ASSERTGT(0.0, 0.0);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_decs_a_lt_b(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTGT_decs_a_lt_b(wr_TestContext context){
     wr_ASSERTGT(0.5, 100.25);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_mix_a_gt_b(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTGT_mix_a_gt_b(wr_TestContext context){
     wr_ASSERTGT(55.5, 20);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_mix_a_equals_b(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTGT_mix_a_equals_b(wr_TestContext context){
     wr_ASSERTGT(9, 9.0);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_mix_a_lt_b(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTGT_mix_a_lt_b(wr_TestContext context){
     wr_ASSERTGT(-0.5, 12);
     return wr_RETOK;
 }
@@ -74,7 +74,7 @@ wr_CallbackReturn cb_ASSERTGT_ints_a_gt_b(wr_TestContext context){
     assert(wr_settestprediags(context, "Macro wr_ASSERTGT Tests:") == wr_ERROK);
 
     wr_CallbackReturn expect    = wr_RETOK;
-    wr_CallbackReturn real      = sample_ints_a_gt_b(NULL);
+    wr_CallbackReturn real      = sample_ASSERTGT_ints_a_gt_b(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -84,7 +84,7 @@ wr_CallbackReturn cb_ASSERTGT_ints_a_gt_b(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTGT_ints_a_equals_b(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETNOK;
-    wr_CallbackReturn real      = sample_ints_a_equals_b(NULL);
+    wr_CallbackReturn real      = sample_ASSERTGT_ints_a_equals_b(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -94,7 +94,7 @@ wr_CallbackReturn cb_ASSERTGT_ints_a_equals_b(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTGT_ints_a_lt_b(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETNOK;
-    wr_CallbackReturn real      = sample_ints_a_lt_b(NULL);
+    wr_CallbackReturn real      = sample_ASSERTGT_ints_a_lt_b(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -104,7 +104,7 @@ wr_CallbackReturn cb_ASSERTGT_ints_a_lt_b(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTGT_decs_a_gt_b(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETOK;
-    wr_CallbackReturn real      = sample_decs_a_gt_b(NULL);
+    wr_CallbackReturn real      = sample_ASSERTGT_decs_a_gt_b(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -114,7 +114,7 @@ wr_CallbackReturn cb_ASSERTGT_decs_a_gt_b(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTGT_decs_a_equals_b(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETNOK;
-    wr_CallbackReturn real      = sample_decs_a_equals_b(NULL);
+    wr_CallbackReturn real      = sample_ASSERTGT_decs_a_equals_b(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -124,7 +124,7 @@ wr_CallbackReturn cb_ASSERTGT_decs_a_equals_b(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTGT_decs_a_lt_b(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETNOK;
-    wr_CallbackReturn real      = sample_decs_a_lt_b(NULL);
+    wr_CallbackReturn real      = sample_ASSERTGT_decs_a_lt_b(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -134,7 +134,7 @@ wr_CallbackReturn cb_ASSERTGT_decs_a_lt_b(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTGT_mix_a_gt_b(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETOK;
-    wr_CallbackReturn real      = sample_mix_a_gt_b(NULL);
+    wr_CallbackReturn real      = sample_ASSERTGT_mix_a_gt_b(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -144,7 +144,7 @@ wr_CallbackReturn cb_ASSERTGT_mix_a_gt_b(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTGT_mix_a_equals_b(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETNOK;
-    wr_CallbackReturn real      = sample_mix_a_equals_b(NULL);
+    wr_CallbackReturn real      = sample_ASSERTGT_mix_a_equals_b(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -154,7 +154,7 @@ wr_CallbackReturn cb_ASSERTGT_mix_a_equals_b(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTGT_mix_a_lt_b(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETNOK;
-    wr_CallbackReturn real      = sample_mix_a_lt_b(NULL);
+    wr_CallbackReturn real      = sample_ASSERTGT_mix_a_lt_b(NULL);
 
     wr_ASSERTEQ(expect, real);
 

@@ -54,25 +54,25 @@ wr_CallbackReturn cb_ASSERTGT_mix_a_equals_b(wr_TestContext context);
 
 wr_CallbackReturn cb_ASSERTGT_mix_a_lt_b(wr_TestContext context);
 
-// /**************************** wr_ASSERTGTEQ Tests *****************************/
+/**************************** wr_ASSERTGTEQ Tests *****************************/
 
-// wr_CallbackReturn cb_ASSERTGTEQ_ints_a_gt_b(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTGTEQ_ints_a_gt_b(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTGTEQ_ints_a_equals_b(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTGTEQ_ints_a_equals_b(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTGTEQ_ints_a_lt_b(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTGTEQ_ints_a_lt_b(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTGTEQ_decs_a_gt_b(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTGTEQ_decs_a_gt_b(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTGTEQ_decs_a_equals_b(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTGTEQ_decs_a_equals_b(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTGTEQ_decs_a_lt_b(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTGTEQ_decs_a_lt_b(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTGTEQ_mix_a_gt_b(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTGTEQ_mix_a_gt_b(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTGTEQ_mix_a_equals_b(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTGTEQ_mix_a_equals_b(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTGTEQ_mix_a_lt_b(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTGTEQ_mix_a_lt_b(wr_TestContext context);
 
 // /***************************** wr_ASSERTLT Tests ******************************/
 

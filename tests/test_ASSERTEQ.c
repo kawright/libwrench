@@ -22,32 +22,32 @@ AUTHOR EMAIL:       kris.al.wright@gmail.com
 ********************************************************************************
 */
 
-wr_CallbackReturn sample_ints_equal(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTEQ_ints_equal(wr_TestContext context){
     wr_ASSERTEQ(5, 5);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_ints_not_equal(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTEQ_ints_not_equal(wr_TestContext context){
     wr_ASSERTEQ(-3, 19);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_decs_equal(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTEQ_decs_equal(wr_TestContext context){
     wr_ASSERTEQ(7.5, 7.5);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_decs_not_equal(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTEQ_decs_not_equal(wr_TestContext context){
     wr_ASSERTEQ(1.0, 10.0);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_mix_equal(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTEQ_mix_equal(wr_TestContext context){
     wr_ASSERTEQ(0, 0.0);
     return wr_RETOK;
 }
 
-wr_CallbackReturn sample_mix_not_equal(wr_TestContext context){
+wr_CallbackReturn sample_ASSERTEQ_mix_not_equal(wr_TestContext context){
     wr_ASSERTEQ(15, 12.25);
     return wr_RETOK;
 }
@@ -59,7 +59,7 @@ wr_CallbackReturn cb_ASSERTEQ_ints_equal(wr_TestContext context){
     assert(wr_settestprediags(context, "Macro wr_ASSERTEQ Tests:") == wr_ERROK);
 
     wr_CallbackReturn expect    = wr_RETOK;
-    wr_CallbackReturn real      = sample_ints_equal(NULL);
+    wr_CallbackReturn real      = sample_ASSERTEQ_ints_equal(NULL);
     
     wr_ASSERTEQ(expect, real);
 
@@ -69,7 +69,7 @@ wr_CallbackReturn cb_ASSERTEQ_ints_equal(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTEQ_ints_not_equal(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETNOK;
-    wr_CallbackReturn real      = sample_ints_not_equal(NULL);
+    wr_CallbackReturn real      = sample_ASSERTEQ_ints_not_equal(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -79,7 +79,7 @@ wr_CallbackReturn cb_ASSERTEQ_ints_not_equal(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTEQ_decs_equal(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETOK;
-    wr_CallbackReturn real      = sample_decs_equal(NULL);
+    wr_CallbackReturn real      = sample_ASSERTEQ_decs_equal(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -89,7 +89,7 @@ wr_CallbackReturn cb_ASSERTEQ_decs_equal(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTEQ_decs_not_equal(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETNOK;
-    wr_CallbackReturn real      = sample_decs_not_equal(NULL);
+    wr_CallbackReturn real      = sample_ASSERTEQ_decs_not_equal(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -99,7 +99,7 @@ wr_CallbackReturn cb_ASSERTEQ_decs_not_equal(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTEQ_mix_equal(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETOK;
-    wr_CallbackReturn real      = sample_mix_equal(NULL);
+    wr_CallbackReturn real      = sample_ASSERTEQ_mix_equal(NULL);
 
     wr_ASSERTEQ(expect, real);
 
@@ -109,7 +109,7 @@ wr_CallbackReturn cb_ASSERTEQ_mix_equal(wr_TestContext context){
 wr_CallbackReturn cb_ASSERTEQ_mix_not_equal(wr_TestContext context){
 
     wr_CallbackReturn expect    = wr_RETNOK;
-    wr_CallbackReturn real      = sample_mix_not_equal(NULL);
+    wr_CallbackReturn real      = sample_ASSERTEQ_mix_not_equal(NULL);
 
     wr_ASSERTEQ(expect, real);
 
