@@ -66,6 +66,12 @@ int main(){
     wr_Test test_ASSERTLTEQ_mix_a_gt_b                          = NULL;
     wr_Test test_ASSERTLTEQ_mix_a_equals_b                      = NULL;
     wr_Test test_ASSERTLTEQ_mix_a_lt_b                          = NULL;
+    wr_Test test_ASSERTNEQ_ints_equal                           = NULL;
+    wr_Test test_ASSERTNEQ_ints_not_equal                       = NULL;
+    wr_Test test_ASSERTNEQ_decs_equal                           = NULL;
+    wr_Test test_ASSERTNEQ_decs_not_equal                       = NULL;
+    wr_Test test_ASSERTNEQ_mix_equal                            = NULL;
+    wr_Test test_ASSERTNEQ_mix_not_equal                        = NULL;
 
     /* Instantiate tests: */
     err = wr_newtest(&cb_ASSERTEQ_ints_equal, 
@@ -296,6 +302,36 @@ int main(){
         &test_ASSERTLTEQ_mix_a_lt_b);
     assert(err == wr_ERROK);
 
+    err = wr_newtest(&cb_ASSERTNEQ_ints_equal,
+        "Test wr_ASSERTNEQ with two equal ints",
+        &test_ASSERTNEQ_ints_equal);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTNEQ_ints_not_equal,
+        "Test wr_ASSERTNEQ with two non-equal ints",
+        &test_ASSERTNEQ_ints_not_equal);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTNEQ_decs_equal,
+        "Test wr_ASSERTNEQ with two equal floats",
+        &test_ASSERTNEQ_decs_equal);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTNEQ_decs_not_equal,
+        "Test wr_ASSERTNEQ with two non-equal floats",
+        &test_ASSERTNEQ_decs_not_equal);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTNEQ_mix_equal,
+        "Test wr_ASSERTNEQ with two equal values of different types",
+        &test_ASSERTNEQ_mix_equal);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTNEQ_mix_not_equal,
+        "Test wr_ASSERTNEQ with two non-equal values of different types",
+        &test_ASSERTNEQ_mix_not_equal);
+    assert(err == wr_ERROK);
+
     /* Create test roster: */
     wr_Test roster[] = {
         test_ASSERTEQ_ints_equal,
@@ -341,7 +377,13 @@ int main(){
         test_ASSERTLTEQ_decs_a_lt_b,
         test_ASSERTLTEQ_mix_a_gt_b,
         test_ASSERTLTEQ_mix_a_equals_b,
-        test_ASSERTLTEQ_mix_a_lt_b
+        test_ASSERTLTEQ_mix_a_lt_b,
+        test_ASSERTNEQ_ints_equal,
+        test_ASSERTNEQ_ints_not_equal,
+        test_ASSERTNEQ_decs_equal,
+        test_ASSERTNEQ_decs_not_equal,
+        test_ASSERTNEQ_mix_equal,
+        test_ASSERTNEQ_mix_not_equal
     };
 
     /* Initialize and instantiate suite: */

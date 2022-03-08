@@ -114,19 +114,19 @@ wr_CallbackReturn cb_ASSERTLTEQ_mix_a_equals_b(wr_TestContext context);
 
 wr_CallbackReturn cb_ASSERTLTEQ_mix_a_lt_b(wr_TestContext context);
 
-// /***************************** wr_ASSERTNEQ Tests *****************************/
+/***************************** wr_ASSERTNEQ Tests *****************************/
 
-// wr_CallbackReturn cb_ASSERTNEQ_ints_equal(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTNEQ_ints_equal(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTNEQ_ints_not_equal(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTNEQ_ints_not_equal(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTNEQ_decs_equal(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTNEQ_decs_equal(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTNEQ_decs_not_equal(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTNEQ_decs_not_equal(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTNEQ_mix_equal(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTNEQ_mix_equal(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTNEQ_mix_not_equal(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTNEQ_mix_not_equal(wr_TestContext context);
 
 // /*************************** wr_ASSERTNOTNULL Tests ***************************/
 
