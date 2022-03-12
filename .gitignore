@@ -4,3 +4,4 @@ example*
 .vscode
 bins
 temp
+*.tap

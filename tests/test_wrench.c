@@ -14,7 +14,7 @@ AUTHOR EMAIL:       kris.al.wright@gmail.com
 #include <assert.h>
 #include <stdio.h>
 
-#define OUTPUT_PATH "./build/tests/wrench_test_results.tap"
+#define OUTPUT_PATH "./wrench_test_report.tap"
 
 int main(){
 
@@ -76,6 +76,13 @@ int main(){
     wr_Test test_ASSERTNOTNULL_not_null                         = NULL;
     wr_Test test_ASSERTNULL_null                                = NULL;
     wr_Test test_ASSERTNULL_not_null                            = NULL;
+    wr_Test test_ASSERTSTREQ_equal_strs                         = NULL;
+    wr_Test test_ASSERTSTREQ_not_equal_strs                     = NULL;
+    wr_Test test_ASSERTSTREQ_empty_strs                         = NULL;
+    wr_Test test_ASSERTSTREQ_a_empty                            = NULL;
+    wr_Test test_ASSERTSTREQ_b_empty                            = NULL;
+    wr_Test test_ASSERTSTREQ_a_substr_of_b                      = NULL;
+    wr_Test test_ASSERTSTREQ_b_substr_of_a                      = NULL;
 
     /* Instantiate tests: */
     err = wr_newtest(&cb_ASSERTEQ_ints_equal, 
@@ -356,6 +363,41 @@ int main(){
         &test_ASSERTNULL_not_null);
     assert(err == wr_ERROK);
 
+    err = wr_newtest(&cb_ASSERTSTREQ_equal_strs,
+        "Test wr_ASSERTSTREQ with two identical strings",
+        &test_ASSERTSTREQ_equal_strs);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTREQ_not_equal_strs,
+        "Test wr_ASSERTSTREQ with two different strings",
+        &test_ASSERTSTREQ_not_equal_strs);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTREQ_empty_strs,
+        "Test wr_ASSERTSTREQ with two empty strings",
+        &test_ASSERTSTREQ_empty_strs);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTREQ_a_empty,
+        "Test wr_ASSERTSTREQ where only `a` is an empty string",
+        &test_ASSERTSTREQ_a_empty);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTREQ_b_empty,
+        "Test wr_ASSERTSTREQ where only `b` is an empty string",
+        &test_ASSERTSTREQ_b_empty);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTREQ_a_subtr_of_b,
+        "Test wr_ASSERTSTREQ where `b` begins with the substring `a`",
+        &test_ASSERTSTREQ_a_substr_of_b);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTREQ_b_substr_of_a,
+        "Test wr_ASSERTSTREQ where `a` begins with the substring `b`",
+        &test_ASSERTSTREQ_b_substr_of_a);
+    assert(err == wr_ERROK);
+
     /* Create test roster: */
     wr_Test roster[] = {
         test_ASSERTEQ_ints_equal,
@@ -411,7 +453,14 @@ int main(){
         test_ASSERTNOTNULL_null,
         test_ASSERTNOTNULL_not_null,
         test_ASSERTNULL_null,
-        test_ASSERTNULL_not_null
+        test_ASSERTNULL_not_null,
+        test_ASSERTSTREQ_equal_strs,
+        test_ASSERTSTREQ_not_equal_strs,
+        test_ASSERTSTREQ_empty_strs,
+        test_ASSERTSTREQ_a_empty,
+        test_ASSERTSTREQ_b_empty,
+        test_ASSERTSTREQ_a_substr_of_b,
+        test_ASSERTSTREQ_b_substr_of_a
     };
 
     /* Initialize and instantiate suite: */
@@ -435,12 +484,13 @@ int main(){
     printf("Running test suite. Please wait...\n");
     err = wr_runsuite(mainsuite, &res);
     assert(err == wr_ERROK);
-    printf("Finished!\n");
 
     /* Give the proper exit code: */
     if (res == wr_SRESOK){
+        printf("Finished - All tests passed!\n");
         return 0;
     } else {
+        printf("Finished - One or more tests failed.\n");
         return 1;
     }
 }

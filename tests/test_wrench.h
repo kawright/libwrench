@@ -140,21 +140,21 @@ wr_CallbackReturn cb_ASSERTNULL_null(wr_TestContext context);
 
 wr_CallbackReturn cb_ASSERTNULL_not_null(wr_TestContext context);
 
-// /**************************** wr_ASSERTSTREQ Tests ****************************/
+/**************************** wr_ASSERTSTREQ Tests ****************************/
 
-// wr_CallbackReturn cb_ASSERTSTREQ_equal_strs(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTSTREQ_equal_strs(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTSTREQ_not_equal_strs(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTSTREQ_not_equal_strs(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTSTREQ_empty_strs(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTSTREQ_empty_strs(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTSTREQ_a_empty(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTSTREQ_a_empty(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTSTREQ_b_empty(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTSTREQ_b_empty(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTSTREQ_a_subtr_of_b(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTSTREQ_a_subtr_of_b(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTSTREQ_b_substr_of_a(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTSTREQ_b_substr_of_a(wr_TestContext context);
 
 // /**************************** wr_ASSERTSTRGT Tests ****************************/
 

@@ -1,7 +1,7 @@
 /*
 test_ASSERTNOTNULL.c
 
-This file contains the implementation for all unit tests of the wr_ASSERTFALSE
+This file contains the implementation for all unit tests of the wr_ASSERTNOTNULL
 macro.
 
 PROJECT WEBSITE:    https://kriswrightdev.com/wrench/home
