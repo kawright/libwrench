@@ -134,11 +134,11 @@ wr_CallbackReturn cb_ASSERTNOTNULL_null(wr_TestContext context);
 
 wr_CallbackReturn cb_ASSERTNOTNULL_not_null(wr_TestContext context);
 
-// /**************************** wr_ASSERTNULL Tests *****************************/
+/**************************** wr_ASSERTNULL Tests *****************************/
 
-// wr_CallbackReturn cb_ASSERTNULL_null(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTNULL_null(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTNULL_not_null(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTNULL_not_null(wr_TestContext context);
 
 // /**************************** wr_ASSERTSTREQ Tests ****************************/
 
