@@ -128,11 +128,11 @@ wr_CallbackReturn cb_ASSERTNEQ_mix_equal(wr_TestContext context);
 
 wr_CallbackReturn cb_ASSERTNEQ_mix_not_equal(wr_TestContext context);
 
-// /*************************** wr_ASSERTNOTNULL Tests ***************************/
+/*************************** wr_ASSERTNOTNULL Tests ***************************/
 
-// wr_CallbackReturn cb_ASSERTNOTNULL_null(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTNOTNULL_null(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTNOTNULL_not_null(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTNOTNULL_not_null(wr_TestContext context);
 
 // /**************************** wr_ASSERTNULL Tests *****************************/
 

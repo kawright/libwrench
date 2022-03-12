@@ -72,6 +72,8 @@ int main(){
     wr_Test test_ASSERTNEQ_decs_not_equal                       = NULL;
     wr_Test test_ASSERTNEQ_mix_equal                            = NULL;
     wr_Test test_ASSERTNEQ_mix_not_equal                        = NULL;
+    wr_Test test_ASSERTNOTNULL_null                             = NULL;
+    wr_Test test_ASSERTNOTNULL_not_null                         = NULL;
 
     /* Instantiate tests: */
     err = wr_newtest(&cb_ASSERTEQ_ints_equal, 
@@ -332,6 +334,16 @@ int main(){
         &test_ASSERTNEQ_mix_not_equal);
     assert(err == wr_ERROK);
 
+    err = wr_newtest(&cb_ASSERTNOTNULL_null,
+        "Test wr_ASSERTNOTNULL with a `NULL` pointer",
+        &test_ASSERTNOTNULL_null);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTNOTNULL_not_null,
+        "Test wr_ASSERTNOTNULL with a non `NULL` pointer",
+        &test_ASSERTNOTNULL_not_null);
+    assert(err == wr_ERROK);
+
     /* Create test roster: */
     wr_Test roster[] = {
         test_ASSERTEQ_ints_equal,
@@ -383,7 +395,9 @@ int main(){
         test_ASSERTNEQ_decs_equal,
         test_ASSERTNEQ_decs_not_equal,
         test_ASSERTNEQ_mix_equal,
-        test_ASSERTNEQ_mix_not_equal
+        test_ASSERTNEQ_mix_not_equal,
+        test_ASSERTNOTNULL_null,
+        test_ASSERTNOTNULL_not_null
     };
 
     /* Initialize and instantiate suite: */
