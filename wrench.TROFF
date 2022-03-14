@@ -1,0 +1,540 @@
+.TH wrench 3 "12 March 2022" "v0.1.1" 
+.SH NAME
+wrench \- simple unit testing for C
+.SH SYNOPSIS
+#include <wrench.h>
+.SH DESCRIPTION
+.B wrench
+is a simple unit testing framework for C that has everything you need to test your project in an easy-to-use API that won’t get in your way, stress you out, or make you learn and use a whole bunch of stuff you really don’t need.
+.PP
+Please keep in mind that all 0.x.y releases are subject to unannounced backwards-incompatible changes to the API. 
+Use these pre-release builds at your own risk!
+.SH ENUMS
+.SS enum wr_CallbackReturn
+This enum contains all values that may be returned by a wrench callback function.
+.TP
+.I wr_RETOK
+Indicates that the given test callback passed. 
+Should only be returned by test callbacks.
+.TP
+.I wr_RETNOK
+Indicates that the given test callback failed. 
+Should only be returned by test callbacks.
+.TP
+.I wr_RETBAIL
+Indicates that the entire test suite should be “bailed out” of; that is, the test suite should be immediately aborted and no further tests should be performed. 
+May be returned by any wrench callback.
+.TP
+.I wr_RETSUOK
+Indicates that the given setup function completed successfully. 
+Should only be returned by setup callbacks.
+.TP
+.I wr_RETSUNOK
+Indicates that the given setup function did not complete successfully. 
+This will cause the subsequent test to be skipped. 
+The teardown function, if given, will still be called. 
+Should only be returned by setup callbacks.
+.TP
+.I wr_RETSUNOKSKIPTD
+Indicates that the given setup function did not complete successfully, and that both the test AND teardown functions should be skipped. 
+Should only be returned by setup callbacks.
+.TP
+.I wr_RETTDOK
+Indicates that the given teardown function completed successfully. 
+Should only be returned by teardown callbacks.
+.TP
+.I wr_RETTDNOK
+Indicates that the given teardown function did not complete successfully. 
+Should only be returned by teardown callbacks.
+.SS enum wr_Directive
+This enum contains all of the values used to indicate which (if any) directives should be applied to the output of a given test.
+.TP
+.I wr_DIRNONE
+No directives will be applied to the output of the given test.
+.TP
+.I wr_DIRTODO
+The TODO directive will be applied to the output of the given test.
+.TP
+.I wr_DIRSKIP
+The SKIP directive will be applied to the output of the given test.
+.SS enum wr_ErrorCode
+This enum contains all values which may be returned by a function in the \fBwrench\fR API. 
+These values indicate either the succes of the function returning them, or what type of error occurred during the function’s execution.
+.TP
+.I wr_ERROK
+The function complted execution successfully. 
+No error occurred.
+.TP
+.I wr_ERRMEM
+An error occurred while attempting to allocate or reallocate heap memory.
+.TP
+.I wr_ERRIO
+An error occurred attempting to access a local file.
+.TP
+.I wr_ERREMPTY
+An attempt to run an empty suite was made.
+.SS enum wr_SuiteResult
+This enum contains values which indicate the status of an entire test suite after its completion.
+.TP
+.I wr_SRESOK
+All tests in the suite either passed, or were skipped.
+.TP
+.I wr_SRESNOK
+At least one test failed.
+.TP
+.I wr_SRESBAIL
+The suite was bailed out of before it could complete.
+.SH FUNCTIONS
+NOTE: All \fBwrench\fR functions return a \fIwr_ErrorCode\fR which indicates any errors that may have occurred during execution of the function. 
+All functions that would otherwise return non-void data do so by accepting the final parameter \fIret\fR, which is a pointer to where this data will be written to.
+.SS wr_ErrorCode wr_attach(wr_TestContext instance, void *obj)
+Add a single attachment to a test context. 
+This allows the user to be able to pass any arbitrary data between the setup function, the test implementation, and the teardown function, allowing a continuous state to be maintained throughout the test fixture.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The context of the test the attachment is being added to.
+.TP
+.I obj
+Points to the data in which this attachment refers.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The attachment was successfully added to the given context.
+.TP
+.I wr_ERRMEM
+An error occurred while attempting to allocate/reallocate memory for the attachment.
+.SS wr_ErrorCode wr_enableplan(wr_Suite instance)
+Calling this function will have the effect of causing the plan for the given suite to be written to output when it is run. 
+Plans are always written before the first test result.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The suite for which plan output will be enabled.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+Plan print was successfully enabled for the given suite.
+.SS wr_ErrorCode wr_enableskip(wr_TestContext instance)
+Set the directive for the given test context to \fIwr_DIRSKIP\fR.
+Normally, this function would not be called directly by the user, but would be called by the \fIwr_SKIP\fR macro.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The test context for which the directive attribute will be updated.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The given test context’s directive attribute was successfully updated.
+.SS wr_ErrorCode wr_enabletodo(wr_TestContext instance)
+Set the directive attribute for the given test context to \fIwr_DIRTODO\fR.
+The preferred method of changing the directive attribute of a given test context is not to call this method directly, but rather to use the \fIwr_TODO\fR macro instead.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The test context for which the directive attribute will be updated.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The given test context’s directive attribute was successfully updated.
+.SS wr_ErrorCode wr_errtostr(wr_ErrorCode code, char **ret)
+Convert an error code into a string which describes the meaning of the code.
+.PP
+\fBNOTE\fR: The memory for the return data is allocated using malloc and must be freed by the user!
+.PP
+\fBPARAMETERS\fR
+.TP
+.I code
+The error code which is being converted.
+.TP
+.I ret
+Pointer to the return data.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The description of the given error code was successfully written to ret.
+.TP
+.I wr_ERRMEM
+An error occurred while attempting to allocate memory for the return data.
+.SS wr_ErrorCode wr_getattach(wr_TestContext instance, int index, void **ret)
+Fetch an attachment from a given test context.
+.PP
+\fBHINT\fR: Use \fIwr_getattachct()\fR to determine the upper limit for values that may be passed to index.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The test context from which the attachment is being fetched.
+.TP
+.I index
+The index of the attachment being fetched.
+.TP
+.I ret
+Pointer to the return data.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The attachment was successfully fetched.
+.SS wr_ErrorCode wr_getattachct(wr_TestContext instance, int *ret)
+Fetch the number of attachments that have been added to a given test context.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The test context from which the attachment count is being fetched.
+.TP
+.I ret
+Pointer to the return data.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The attachment count was successfully fetched.
+.SS wr_ErrorCode wr_getdesc(wr_TestContext instance, char **ret)
+Fetch the description from a given test context.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The test context from which the description is being fetched.
+.TP
+.I ret
+Pointer to the return data.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The description was successfully fetched.
+.SS wr_ErrorCode wr_gettestno(wr_TestContext instance, int *ret)
+Fetch the test number from a given test context.
+.PP
+\fBNOTE\fR: Test numbers are one-indexed, not zero-indexed. 
+This is so that the first test that is written to output is test ‘one’.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The test context from which the test number is being fetched.
+.TP
+.I ret
+Pointer to the return data.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The test number was successfully fetched.
+.SS wr_ErrorCode wr_newsuite(wr_Test *roster, int count, char *outfile, wr_Suite *ret)
+Create a new test suite.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I roster
+Pointer to the first element in an array of \fIwr_Test\fR. 
+This array comprises the roster of individual tests which will be run when the new suite is run.
+.TP
+.I count
+The number of tests from roster which will be run.
+.TP
+.I outfile
+The path to the file where the new suite’s output will be written to.
+.TP
+.I ret
+Pointer to the return data, which is the new suite.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The new suite was successfully created and returned.
+.TP
+.I wr_ERRMEM
+An error occurred while attempting to allocate memory for the return data.
+.TP
+.I wr_ERREMPTY
+\fIcount\fR is less than 1.
+.SS wr_ErrorCode wr_newtest(wr_Callback callback, char *desc, wr_Test *ret)
+Create a new test.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I callback
+The function containing this test’s implementation.
+.TP
+.I desc
+A description of the test. 
+This is the description that will be used for the suite’s output.
+.TP
+.I ret
+Pointer to the return data, which is the new test.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The new test was successfully created and returned.
+.TP
+.I wr_ERRMEM
+An error occurred while attempting to allocate memory for the return data.
+.SS wr_ErrorCode wr_regsetup(wr_Suite instance, wr_Callback callback)
+Register a callback function to be used as the setup function for a given suite.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The suite for which the setup function is being registered.
+.TP
+.I callback
+The function which will be used as the setup function.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The setup function was successfully registered.
+.SS wr_ErrorCode wr_regteardown(wr_Suite instance, wr_Callback callback)
+Register a callback function to be used as the teardown function for a given suite.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The suite for which the teardown function is being registered.
+.TP
+.I callback
+The function which will be used as the teardown function.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The teardown function was successfully registered.
+.SS wr_ErrorCode wr_runsuite(wr_Suite instance, wr_SuiteResult *ret)
+Run a test suite.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The suite which is to be run.
+.TP
+.I ret
+Pointer to the return data, which is a \fIwr_SuiteResult\fR that indicates the status of the suite run as of its completion.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The test was successfully run. 
+Please keep in mind that receiving this error code does not imply any particular result from running the suite–-to determine if the suite passed or failed, you must examine the value written to ret.
+.TP
+.I wr_ERRIO
+An error occurred while attempting to open the suite’s output file with write access.
+.TP
+.I wr_ERRMEM
+An error occurred while attempting to allocate memory for a test context.
+.SS wr_ErrorCode wr_setrem(wr_TestContext instance, char *rem)
+Add a remark to a given test context.
+For tests with a directive, the remark will be the explainatory text which follows the directive. For tests without a directive, the remark will appear within a parenthentical directly after the test’s description.
+.PP
+\fBWARNING\fR: This function will not free the test’s existing remark if it has already been assigned. 
+Thus, it is only safe to call this function once per test context.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The test in which the remark will be assigned.
+.TP
+.I rem
+The string which will be assigned as the test’s remark.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The remark was successfully added.
+.TP
+.I wr_ERRMEM
+An error occurred while attempting to allocate memory for the remark.
+.SS wr_ErrorCode wr_setsuiteprediags(wr_Suite instance, char *dirs)
+Assign a string to be used as prefix diagnostics for a given suite.
+The prefix diagnostics are written to the output before the results of any tests are written. 
+The given string will be split into separate diagnostics at each occurrence of the newline ‘\\n’ character.
+.PP
+\fBWARNING\fR: This function will not free the suite’s existing prefix diagnostics if they have already been assigned. 
+Thus, it is only safe to call this function once per suite.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The suite in which the prefix diagnostics will be assigned.
+.TP
+.I dirs
+The string which will be assigned as the given suite’s prefix diagnostics.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The prefix diagnostics were successfully assigned.
+.TP
+.I wr_ERROK
+An error occurred while attempting to allocate memory for the diagnostics.
+.SS wr_ErrorCode wr_setsuitepostdiags(wr_Suite instance, char *dirs)
+Assign a string to be used as suffix diagnostics for a given suite. The suffix diagnostics are written to the output after the results of any tests are written. The given string will be split into separate diagnostics at each occurrence of the newline ‘\\n’ character.
+.PP
+\fBWARNING\fR: This function will not free the suite’s existing suffix diagnostics if they have already been assigned. 
+Thus, it is only safe to call this function once per suite.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The suite in which the suffix diagnostics will be assigned.
+.TP
+.I dirs
+The string which will be assigned as the given suite’s suffix diagnostics.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The suffix diagnostics were successfully assigned.
+.TP
+.I wr_ERROK
+An error occurred while attempting to allocate memory for the diagnostics.
+.SS wr_ErrorCode wr_settestprediags(wr_TestContext instance, char *dirs)
+Assign a string to be used as prefix diagnostics for a given test context.
+The prefix diagnostics are written to the output before the test results are written. 
+The given string will be split into separate diagnostics at each occurrence of the newline ‘\\n’ character.
+.PP
+\fBWARNING\fR: This function will not free the test context’s existing prefix diagnostics if they have already been assigned. 
+Thus, it is only safe to call this function once per test context.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The test context for which the prefix diagnostics will be assigned.
+.TP
+.I dirs
+The string which will be assigned as the given test context’s prefix diagnostics.
+.PP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The prefix diagnostics were successfully assigned.
+.TP
+.I wr_ERROK
+An error occurred while attempting to allocate memory for the diagnostics.
+.SS wr_ErrorCode wr_settestpostdiags(wr_TestContext instance, char *dirs)
+Assign a string to be used as suffix diagnostics for a given test context.
+The suffix diagnostics are written to the output after the test results are written. 
+The given string will be split into separate diagnostics at each occurrence of the newline ‘\\n’ character.
+.PP
+\fBWARNING\fR: This function will not free the test context’s existing suffix diagnostics if they have already been assigned. 
+Thus, it is only safe to call this function once per test context.
+.PP
+\fBPARAMETERS\fR
+.TP
+.I instance
+The test context for which the suffix diagnostics will be assigned.
+.TP
+.I dirs
+The string which will be assigned as the given test context’s suffix diagnostics.
+.TP
+\fBRETURN VALUES\fR
+.TP
+.I wr_ERROK
+The suffix diagnostics were successfully assigned.
+.TP
+.I wr_ERROK
+An error occurred while attempting to allocate memory for the diagnostics.
+.SH MACROS
+.SS wr_ASSERTEQ(a, b)
+Assert that two numeric values, \fIa\fR and \fIb\fR are equal. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.PP
+For an equivalent assertion for strings, please see \fIwr_ASSERTSTREQ\fR.
+.SS wr_ASSERTFALSE(expr)
+Assert that a given expression \fIexpr\fR is false (that is, \fIexpr\fR == 0). If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.SS wr_ASSERTGT(a, b)
+Assert that the given numeric value \fIa\fR is greater-than the given numeric value \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.PP
+For an equivalent assertion for strings, please see \fIwr_ASSERTSTRGT\fR.
+.SS wr_ASSERTGTEQ(a, b)
+Assert that the given numeric value \fIa\fR is greater-than-or-lqual-to the given numeric value \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.PP
+For an equivalent assertion for strings, please see \fIwr_ASSERTSTRGTEQ\fR.
+.SS wr_ASSERTLT(a, b)
+Assert that the given numeric value \fIa\fR is less-than the given numeric value \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.PP
+For an equivalent assertion for strings, please see \fIwr_ASSERTSTRLT\fR.
+.SS wr_ASSERTLTEQ(a, b)
+Assert that the given numeric value \fIa\fR is less-than-or-equal-to the given numeric value \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.PP
+For an equivalent assertion for strings, please see \fIwr_ASSERTSTRLTEQ\fR.
+.SS wr_ASSERTNEQ(a, b)
+Assert that the given numeric value \fIa\fR is not equal to the given numeric value \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.PP
+For an equivalent assertion for strings, please see \fIwr_ASSERTSTRNEQ\fR.
+.SS wr_ASSERTNOTNULL(ptr)
+Assert that the given pointer \fIptr\fR is not \fINULL\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.SS wr_ASSERTNULL(ptr)
+Assert that the given pointer \fIptr\fR is \fINULL\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.SS wr_ASSERTSTREQ(a, b)
+Assert that the given string \fIa\fR (i.e. char *a) is equal to the given string \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.SS wr_ASSERTSTRGT(a, b)
+Assert that the first different character between two given strings \fIa\fR (i.e. char *a) and \fIb\fR is greater in \fIa\fR than in \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.SS wr_ASSERTSTRGTEQ(a, b)
+Assert that either the two given strings \fIa\fR (i.e. char *a) and \fIb\fR are equal, or that the first different character between the two is greater in \fIa\fR than in \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.SS wr_ASSERTSTRLT(a, b)
+Assert that the first different character between two given strings \fIa\fR (i.e. char *a) and \fIb\fR is less in \fIa\fR than in \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.SS wr_ASSERTSTRLTEQ(a, b)
+Assert that either the two given strings \fIa\fR (i.e. char *a) and \fIb\fR are equal, or that the first different character netween the two is less in \fIa\fR than in \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.SS wr_ASSERTSTRNEQ(a, b)
+Assert that the given string \fIa\fR (i.e. *char *a) is not equal to the given string \fIb\fR. 
+If the assertion fails, the test will immediately return with \fIwr_RETNOK\fR.
+.SS wr_ASSERTTRUE(expr)
+Assert that the given expression \fIexpr\fR is true (that is, \fIexpr\fR != 0). 
+If the assertion fails, the current test will immediately return with \fIwr_RETNOK\fR.
+.SS wr_BAILOUT
+Bail out of the entire test suite. 
+Causes the current test to immediately return with with \fIwr_RETBAIL\fR.
+.SS wr_SKIP
+Skip this test. 
+Causes the test context’s directive to be set to \fIwr_DIRSKIP\fR and immediately returns with \fIwr_RETOK\fR.
+.SS wr_TODO
+Mark this test as a TODO item. 
+Causes the test context’s directive attribute to be set to \fIwr_DIRTODO\fR.
+.PP
+This macro is an alias of the \fIwr_enabletodo\fR function, and is provided as a conventience so that the API looks consistent.
+.SH TYPES
+.SS typedef wr_CallbackReturn (*wr_Callback)(wr_TestContext context)
+A function pointer for a callback function which may be used as either a single test implementation, a setup function, or a teardown function.
+.SS typedef struct wr_Suite *wr_Suite
+An opaque handle to an object which stores the attributes of an entire test suite.
+.SS typedef struct wr_Test *wr_Test
+An opaque handle to an object which stores the attributes of a given test.
+.SS typedef struct wr_TestContext *wr_TestContext
+An opaque handle to an object which stores the state of a given test.
+.SH LICENSE
+MIT License
+.PP
+Copyright (c) 2022 Kristoffer A. Wright
+.PP
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+.PP
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+.PP
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

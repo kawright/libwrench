@@ -12,6 +12,11 @@ install: build/static/libwrench.a build/shared/libwrench.so wrench.h
 	@ mkdir -p /usr/local/include/
 	@ cp wrench.h /usr/local/include/wrench.h
 	@ chmod 644 /usr/local/include/wrench.h
+	@ mkdir -p /usr/local/share
+	@ mkdir -p /usr/local/share/man
+	@ mkdir -p /usr/local/share/man/man3
+	@ gzip -c wrench.TROFF > /usr/local/share/man/man3/wrench.3.gz
+	@ mandb > /dev/null
 	@ echo DONE!
 
 uninstall:
@@ -19,6 +24,7 @@ uninstall:
 	@ rm -f /usr/local/lib/libwrench.a
 	@ rm -f /usr/local/lib/libwrench.so
 	@ rm -f /usr/local/include/wrench.h
+	@ rm -f /usr/local/share/man/man3/wrench.1.gz
 	@ echo DONE!
 
 bins: build/static/libwrench.a build/shared/libwrench.so
