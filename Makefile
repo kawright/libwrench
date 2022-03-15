@@ -47,7 +47,8 @@ testobjs = build/tests/obj/wrench.o \
 	build/tests/obj/test_ASSERTNOTNULL.o \
 	build/tests/obj/test_ASSERTNULL.o \
 	build/tests/obj/test_ASSERTSTREQ.o \
-	build/tests/obj/test_ASSERTSTRGT.o
+	build/tests/obj/test_ASSERTSTRGT.o \
+	build/tests/obj/test_ASSERTSTRGTEQ.o
 
 # TESTS
 

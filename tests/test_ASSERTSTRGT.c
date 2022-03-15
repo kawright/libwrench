@@ -1,7 +1,7 @@
 /*
 test_ASSERTSTRGT.c
 
-This file contains the implementation for all unit test of the wr_ASSERTSTRGT
+This file contains the implementation for all unit tests of the wr_ASSERTSTRGT
 macro.
 
 PROJECT WEBSITE:    https://kriswrightdev.com/wrench/home
