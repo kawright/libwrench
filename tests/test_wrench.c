@@ -115,6 +115,13 @@ int main(){
     wr_Test test_ASSERTSTRLTEQ_b_empty                          = NULL;
     wr_Test test_ASSERTSTRLTEQ_a_substr_of_b                    = NULL;
     wr_Test test_ASSERTSTRLTEQ_b_substr_of_a                    = NULL;
+    wr_Test test_ASSERTSTRNEQ_equal_strs                        = NULL;
+    wr_Test test_ASSERTSTRNEQ_not_equal_strs                    = NULL;
+    wr_Test test_ASSERTSTRNEQ_empty_strs                        = NULL;
+    wr_Test test_ASSERTSTRNEQ_a_empty                           = NULL;
+    wr_Test test_ASSERTSTRNEQ_b_empty                           = NULL;
+    wr_Test test_ASSERTSTRNEQ_a_substr_of_b                     = NULL;
+    wr_Test test_ASSERTSTRNEQ_b_substr_of_a                     = NULL;
 
     /* Instantiate tests: */
     err = wr_newtest(&cb_ASSERTEQ_ints_equal, 
@@ -590,6 +597,41 @@ int main(){
         &test_ASSERTSTRLTEQ_b_substr_of_a);
     assert(err == wr_ERROK);
 
+    err = wr_newtest(&cb_ASSERTSTRNEQ_equal_strs,
+        "Test wr_ASSERTSTRNEQ with two equal strings",
+        &test_ASSERTSTRNEQ_equal_strs);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTRNEQ_not_equal_strs,
+        "Test wr_ASSERTSTRNEQ with two non-equal strings",
+        &test_ASSERTSTRNEQ_not_equal_strs);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTRNEQ_empty_strs,
+        "Test wr_ASSERTSTRNEQ with two empty strings",
+        &test_ASSERTSTRNEQ_empty_strs);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTRNEQ_a_empty,
+        "Test wr_ASSERTSTRNEQ where `a` is an empty string",
+        &test_ASSERTSTRNEQ_a_empty);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTRNEQ_b_empty,
+        "Test wr_ASSERTSTRNEQ where `b` is an empty string",
+        &test_ASSERTSTRNEQ_b_empty);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTRNEQ_a_substr_of_b,
+        "Test wr_ASSERTSTRNEQ where `b` begins with the substring `a`",
+        &test_ASSERTSTRNEQ_a_substr_of_b);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTSTRNEQ_b_substr_of_a,
+        "Test wr_ASSERTSTRNEQ where `a` begins with the substring `b`",
+        &test_ASSERTSTRNEQ_b_substr_of_a);
+    assert(err == wr_ERROK);
+
     /* Create test roster: */
     wr_Test roster[] = {
         test_ASSERTEQ_ints_equal,
@@ -684,7 +726,14 @@ int main(){
         test_ASSERTSTRLTEQ_a_empty,
         test_ASSERTSTRLTEQ_b_empty,
         test_ASSERTSTRLTEQ_a_substr_of_b,
-        test_ASSERTSTRLTEQ_b_substr_of_a
+        test_ASSERTSTRLTEQ_b_substr_of_a,
+        test_ASSERTSTRNEQ_equal_strs,
+        test_ASSERTSTRNEQ_not_equal_strs,
+        test_ASSERTSTRNEQ_empty_strs,
+        test_ASSERTSTRNEQ_a_empty,
+        test_ASSERTSTRNEQ_b_empty,
+        test_ASSERTSTRNEQ_a_substr_of_b,
+        test_ASSERTSTRNEQ_b_substr_of_a
     };
 
     /* Initialize and instantiate suite: */
