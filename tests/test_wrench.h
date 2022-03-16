@@ -244,10 +244,10 @@ wr_CallbackReturn cb_ASSERTSTRNEQ_a_substr_of_b(wr_TestContext context);
 
 wr_CallbackReturn cb_ASSERTSTRNEQ_b_substr_of_a(wr_TestContext context);
 
-// /**************************** wr_ASSERTFALSE tests ****************************/
+/**************************** wr_ASSERTTRUE Tests *****************************/
 
-// wr_CallbackReturn cb_ASSERTTRUE_zero(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTTRUE_zero(wr_TestContext context);
 
-// wr_CallbackReturn cb_ASSERTTRUE_not_zero(wr_TestContext context);
+wr_CallbackReturn cb_ASSERTTRUE_not_zero(wr_TestContext context);
 
 #endif

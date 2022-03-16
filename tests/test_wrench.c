@@ -122,6 +122,8 @@ int main(){
     wr_Test test_ASSERTSTRNEQ_b_empty                           = NULL;
     wr_Test test_ASSERTSTRNEQ_a_substr_of_b                     = NULL;
     wr_Test test_ASSERTSTRNEQ_b_substr_of_a                     = NULL;
+    wr_Test test_ASSERTTRUE_zero                                = NULL;
+    wr_Test test_ASSERTTRUE_not_zero                            = NULL;
 
     /* Instantiate tests: */
     err = wr_newtest(&cb_ASSERTEQ_ints_equal, 
@@ -632,6 +634,16 @@ int main(){
         &test_ASSERTSTRNEQ_b_substr_of_a);
     assert(err == wr_ERROK);
 
+    err = wr_newtest(&cb_ASSERTTRUE_zero,
+        "Test wr_ASSERTTRUE with zero",
+        &test_ASSERTTRUE_zero);
+    assert(err == wr_ERROK);
+
+    err = wr_newtest(&cb_ASSERTTRUE_not_zero,
+        "Test wr_ASSERTTRUE with a non-zero value",
+        &test_ASSERTTRUE_not_zero);
+    assert(err == wr_ERROK);
+
     /* Create test roster: */
     wr_Test roster[] = {
         test_ASSERTEQ_ints_equal,
@@ -733,7 +745,9 @@ int main(){
         test_ASSERTSTRNEQ_a_empty,
         test_ASSERTSTRNEQ_b_empty,
         test_ASSERTSTRNEQ_a_substr_of_b,
-        test_ASSERTSTRNEQ_b_substr_of_a
+        test_ASSERTSTRNEQ_b_substr_of_a,
+        test_ASSERTTRUE_zero,
+        test_ASSERTTRUE_not_zero
     };
 
     /* Initialize and instantiate suite: */
